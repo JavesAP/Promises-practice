@@ -1,17 +1,43 @@
 export const getFirstResolvedPromise = (promises) => {
   //*  write code to pass test ⬇ ️
+  return Promise.any(promises).then((value) => value);
 };
 
 export const getFirstPromiseOrFail = (promises) => {
   //*  write code to pass test ⬇ ️
+  return Promise.race(promises).then((result) => result)
 };
 
 export const getQuantityOfRejectedPromises = (promises) => {
   //*  write code to pass test ⬇ ️
+  let sum = 0;
+  return Promise.allSettled(promises).
+    then((resultsArr) => {
+
+      resultsArr.forEach((object) => {
+        if (object.status === "rejected") {
+          sum += 1
+        }
+      })
+
+      return sum
+    });
 };
 
 export const getQuantityOfFulfilledPromises = (promises) => {
   //*  write code to pass test ⬇ ️
+  let sum = 0;
+  return Promise.allSettled(promises).
+    then((resultsArr) => {
+
+      resultsArr.forEach((object) => {
+        if (object.status === "fulfilled") {
+          sum += 1
+        }
+      })
+
+      return sum
+    });
 };
 
 //!  ⬇ ⬇ ⬇ ⬇ Don't Edit This Array ⬇ ⬇ ⬇ ⬇
@@ -45,4 +71,31 @@ export const fetchAllCharactersByIds = async (ids) => {
   // To solve this you must fetch all characters passed in the array at the same time
   // use the `fetchCharacterById` function above to make this work
   //*  write code to pass test ⬇ ️
+  let characterOne = 0;
+  let characterTwo = 0;
+  let characterThree = 0;
+
+  /*
+  let characters = [];
+  for (let i = 0; i < ids.length; i++) {
+    if (ids.length <= 3) {
+      const character = await fetchCharacterById(ids[i]);
+      characters.push(character)
+    } else {
+      return []
+    }
+  }
+  return characters
+  */
+  
+  if (ids.length <= 2) {
+    characterOne = fetchCharacterById(ids[0]);
+    characterTwo = fetchCharacterById(ids[1]);
+    return await Promise.all([characterOne, characterTwo])
+  } else if (ids.length <= 3) {
+    characterOne = fetchCharacterById(ids[0]);
+    characterTwo = fetchCharacterById(ids[1]);
+    characterThree = fetchCharacterById(ids[2]);
+    return await Promise.all([characterOne, characterTwo, characterThree])
+  } else return []
 };
