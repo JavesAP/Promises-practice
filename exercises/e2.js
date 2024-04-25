@@ -17,19 +17,13 @@
 
 export const getPromise = (bool) => {
   // Your code goes here...
-  const newPromise = new Promise((resolve) => {
-    resolve('The PROMISE was RESOLVED')
+  return new Promise((res, rej) => {
+    if (bool) {
+      res('The PROMISE was RESOLVED')
+    } else {
+      rej('The PROMISE was REJECTED')
+    }
   });
-
-  const secondProm = new Promise((reject) => {
-    reject('The PROMISE was REJECTED')
-  });
-
-  if (bool) {
-    return newPromise
-  } else {
-    return secondProm
-  }
 };
 
 /**
@@ -46,14 +40,8 @@ export const handlePromise = (prom) => {
   return prom
     .then(
       (resolved) => resolved,
-      //(resolved) => resolved,
-      //(rejected) => rejected
+      () => { return "Uh Oh" }
     )
-    .catch(() => {
-      const newString = 'Uh Oh';
-      console.log(prom);
-      return newString
-    })
 };
 
 // === TEST YOURSELF ===

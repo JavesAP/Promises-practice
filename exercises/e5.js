@@ -23,12 +23,9 @@ export const attachTitle = (arg) => {
 
 export const getPromise = () => {
   // Your code goes here...
-  const promise = new Promise((resolve) => resolve('MANHATTAN'));
-
-  return promise
-  .then(
-    (val) => console.log(attachTitle(val)),
-  )
+  return new Promise((resolve) => resolve('MANHATTAN'))
+  .then((val) => attachTitle(val))
+  .then((role) => console.log(role))
 };
 
 // === TEST YOURSELF ===

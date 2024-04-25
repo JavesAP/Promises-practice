@@ -58,10 +58,7 @@ export const handlePromise = (prom) => {
   // Your code goes here...
   return prom 
     .then((res) => res)
-    .catch((rej) => {
-      if (rej.message) onReject(rej);
-      else rej
-    })
+    .catch((reason) => (reason.message ? onReject(reason) : reason));
 
 };
 

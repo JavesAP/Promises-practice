@@ -40,11 +40,7 @@ export function alwaysThrows() {
 
 export function onReject(receive) {
   // Your code goes here...
-  if (typeof receive === 'object') {
-    console.log(receive.message)
-  } else {
-    console.log(receive)
-  }
+  console.log(receive.message || receive)
 }
 
 /**
@@ -69,7 +65,7 @@ export function onReject(receive) {
  */
 
 // Your code goes here...
-export const promise = Promise.resolve(iterate(0))
+export const promise = Promise.resolve(iterate(1))
 .then((res) => iterate(res))
 .then((res) => iterate(res))
 .then((res) => iterate(res))
